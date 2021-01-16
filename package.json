@@ -1,20 +1,39 @@
 {
   "name": "sails-hook-jsonwebtoken",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "jsonwebtoken hook for Sails.js v1",
-  "main": "index.js",
+  "main": "lib/sails-hook-jsonwebtoken.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint && npm run custom-tests",
+    "custom-tests": "node ./node_modules/mocha/bin/mocha && echo \"Custom tests all passed.\" && echo",
+    "lint": "node ./node_modules/eslint/bin/eslint . --max-warnings=0 && echo '✔  Your code looks good.'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jorgevrgs/sails-hook-jsonwebtoken.git"
   },
-  "keywords": [],
+  "keywords": ["sails", "jwt", "jsonwebtoken", "sails-hooks", "sails-helpers"],
   "author": "Jorge Vargas",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jorgevrgs/sails-hook-jsonwebtoken/issues"
   },
-  "homepage": "https://github.com/jorgevrgs/sails-hook-jsonwebtoken#readme"
+  "homepage": "https://github.com/jorgevrgs/sails-hook-jsonwebtoken#readme",
+  "dependencies": {
+    "@sailshq/lodash": "^3.10.4",
+    "sails-hook-organics": "^2.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^7.18.0",
+    "mocha": "^8.2.1",
+    "supertest": "^6.1.1"
+  },
+  "sails": {
+    "isHook": true,
+    "hookName": "jsonwebtoken"
+  },
+  "engines": {
+    "node": ">=8"
+  }
 }

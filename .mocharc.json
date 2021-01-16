@@ -1,0 +1,19 @@
+{
+  "global": ["Cloud", "app", "assert"],
+  "slow": 75,
+  "timeout": 10000,
+  "ui": "bdd",
+
+  "color": true,
+  "diff": true,
+  "reporter": "spec",
+
+  "package": "./package.json",
+
+  "extension": ["js"],
+  "recursive": true,
+  "watch-files": ["api/**/*.js", "test/**/*.js"],
+  "watch-ignore": ["node_modules"],
+
+  "spec": "test"
+}
