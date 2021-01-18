@@ -25,7 +25,7 @@ before(function (done) {
     configOverrides = Object.assign({}, configOverrides, {
       appPath: './test/app',
       log: Object.assign({}, configOverrides.log, {
-        level: 'silly',
+        level: 'info',
       }),
       globals: false,
       hooks: Object.assign({}, configOverrides.hooks, {
