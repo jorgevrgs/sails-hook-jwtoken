@@ -5,7 +5,7 @@ jsonwebtoken hook for Sails.js v1
 ## Installation
 
 ```
-npm i PENDING
+npm i sails-hook-jwtoken
 ```
 
 ## Configuration
