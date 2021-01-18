@@ -11,6 +11,16 @@ module.exports = {
   },
 
   fn: function () {
-    return false;
+    if (this.req.me) {
+      return {
+        data: true,
+        message: 'You should receive this data',
+      };
+    }
+
+    return {
+      data: false,
+      message: 'You should not receive this data',
+    };
   },
 };

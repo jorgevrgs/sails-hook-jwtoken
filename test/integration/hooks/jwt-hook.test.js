@@ -73,7 +73,7 @@ describe('Hooks', () => {
   });
 
   describe('Tokens', () => {
-    it('Should allow /api/v1/login without authentication', function (done) {
+    it('Should allow access to a public controller without authentication', function (done) {
       app
         .post('/api/v1/login')
         .set('Content-Type', 'application/json')
@@ -85,14 +85,38 @@ describe('Hooks', () => {
         .catch((err) => done(err));
     });
 
-    it('Should allow /api/v1/account with authentication', function (done) {
+    it('Should allow access to a private controller with authentication', function (done) {
       app
         .post('/api/v1/account')
         .set('Content-Type', 'application/json')
         .set('Authorization', `Bearer ${token}`)
         .expect(200)
         .then((res) => {
-          assert.isFalse(res.body);
+          assert.isTrue(res.body.data);
+          return done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('Should deny access to a private controller without authentication', function (done) {
+      app
+        .post('/api/v1/account')
+        .set('Content-Type', 'application/json')
+        .expect(403)
+        .then((res) => {
+          assert.isEmpty(res.body);
+          return done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('Should deny access to a protected rest blueprint', function (done) {
+      app
+        .get('/api/v1/users')
+        .set('Content-Type', 'application/json')
+        .expect(403)
+        .then((res) => {
+          assert.isEmpty(res.body);
           return done();
         })
         .catch((err) => done(err));

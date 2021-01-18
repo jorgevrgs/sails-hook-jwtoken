@@ -10,13 +10,13 @@
  */
 
 module.exports = async function (req, res, proceed) {
-  sails.log.info('Accessing policies at policies/is-authenticated.js', {
+  sails.log.verbose('Accessing policies at policies/is-authenticated.js', {
     me: req.me,
   });
 
-  if (!req.me) {
-    return res.unauthorized();
+  if (req.me) {
+    return proceed();
   }
 
-  return proceed();
+  return res.forbidden();
 };

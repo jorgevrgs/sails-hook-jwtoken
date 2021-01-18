@@ -32,7 +32,6 @@ before(function (done) {
         'sails-hook-jsonwebtoken': require('../'),
         orm: require('sails-hook-orm'),
         i18n: false,
-        policies: false,
         pubsub: false,
         session: false,
         views: false,
