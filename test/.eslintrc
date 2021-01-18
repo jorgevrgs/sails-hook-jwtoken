@@ -21,7 +21,8 @@
     "assert": true,
     "util": true,
     "_": true,
-    "stdlib": true
+    "stdlib": true,
+    "app": true
     // ^^ Any globals exposed in test suites for convenience go here.
   }
 

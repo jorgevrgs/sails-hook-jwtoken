@@ -12,7 +12,7 @@
 
   "extension": ["js"],
   "recursive": true,
-  "watch-files": ["api/**/*.js", "test/**/*.js"],
+  "watch-files": ["lib/**/*.js", "test/**/*.js"],
   "watch-ignore": ["node_modules"],
 
   "spec": "test"
