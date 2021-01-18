@@ -103,4 +103,5 @@ dist
 # TernJS port file
 .tern-port
 
-test/app/.tmp/local-disk
+test/app/.tmp/**/*.db
+test/app/config/**/*.pem
