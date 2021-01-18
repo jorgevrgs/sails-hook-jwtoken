@@ -29,7 +29,6 @@
     "Promise": true,
     "sails": true,
     "User": true
-    // ^^Available since Node v4
   },
 
   "rules": {

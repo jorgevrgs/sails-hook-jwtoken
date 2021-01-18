@@ -24,9 +24,18 @@ before(function (done) {
 
     configOverrides = Object.assign({}, configOverrides, {
       appPath: './test/app',
+      log: Object.assign({}, configOverrides.log, {
+        level: 'silly',
+      }),
+      globals: false,
       hooks: Object.assign({}, configOverrides.hooks, {
         'sails-hook-jsonwebtoken': require('../'),
+        orm: require('sails-hook-orm'),
+        i18n: false,
+        policies: false,
+        pubsub: false,
         session: false,
+        views: false,
       }),
     });
 
@@ -38,6 +47,14 @@ before(function (done) {
 
       try {
         // Expose a few other globals, for convenience.
+        if (global.sails) {
+          throw new Error(
+            'Test runner cannot expose `sails` -- that global already exists!'
+          );
+        }
+
+        global.sails = sails;
+
         if (global.assert) {
           throw new Error(
             'Test runner cannot expose `assert` -- that global already exists!'

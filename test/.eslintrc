@@ -19,9 +19,7 @@
 
   "globals": {
     "assert": true,
-    "util": true,
-    "_": true,
-    "stdlib": true,
+    "sails": true,
     "app": true
     // ^^ Any globals exposed in test suites for convenience go here.
   }
