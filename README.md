@@ -175,7 +175,12 @@ Example:
 
 module.exports.jwt: {
   privateFile: true,
+  privateFileName: 'private_passphrase', // Default 'private'
   publicFile: true,
+  publicFileName: 'public_passphrase', // Default 'public'
+  ext: '.pem', // Default
+  passphrase: 'test' // Default ''
+
   signOptions: {
     algorithm: 'RS256',
     expiresIn: '7d',
@@ -187,7 +192,7 @@ module.exports.jwt: {
 
 ```
 
-When use a private/public file, create your files:
+When use a private/public file, create your files with the `privateFileName`, `publicFileName` and `ext` configuration:
 
 private: `config/keys/private.pem`
 
