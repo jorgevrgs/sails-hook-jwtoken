@@ -121,5 +121,53 @@ describe('Helpers', function () {
       assert.isDefined(authenticatedUser.id);
     });
   });
+
+  describe('Using passphrase certificates', function () {
+    before(function () {
+      configurationBackup = Object.assign({}, sails.config.jwt);
+
+      Object.assign(sails.config.jwt, {
+        privateFile: true,
+        privateFileName: 'private_passphrase',
+        passphrase: 'test',
+        publicFile: true,
+        publicFileName: 'public_passphrase',
+
+        signOptions: {
+          algorithm: 'RS256',
+          expiresIn: '7d',
+        },
+        verifyOptions: {
+          algorithms: ['RS256'],
+        },
+      });
+    });
+
+    after(function () {
+      sails.config.jwt = configurationBackup;
+    });
+
+    it('Should load a private {key, passphrase} object', async function () {
+      const key = await sails.helpers.jwt.key('private');
+
+      assert.hasAllKeys(key, ['key', 'passphrase']);
+    });
+
+    it('Should sign a key from file', async function () {
+      tokenFromFile = await sails.helpers.jwt.sign({ sub: user.id });
+
+      assert.isString(tokenFromFile);
+    });
+
+    it('Should verify a key from file', async function () {
+      const authenticatedUser = await sails.helpers.jwt.verify({
+        headers: {
+          authorization: `Bearer ${tokenFromFile}`,
+        },
+      });
+
+      assert.isDefined(authenticatedUser.id);
+    });
+  });
   // });
 });
