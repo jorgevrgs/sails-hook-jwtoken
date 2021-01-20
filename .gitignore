@@ -104,4 +104,4 @@ dist
 .tern-port
 
 test/app/.tmp/**/*.db
-test/app/config/**/*.pem
+#test/app/config/**/*.pem

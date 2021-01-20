@@ -19,7 +19,7 @@
     "sails-hooks",
     "sails-helpers"
   ],
-  "author": "Jorge Vargas",
+  "author": "Jorge Vargas <jorgevargasla@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jorgevrgs/sails-hook-jsonwebtoken/issues"
@@ -44,5 +44,8 @@
   },
   "engines": {
     "node": ">=8"
+  },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/@jorgevrgs"
   }
 }
