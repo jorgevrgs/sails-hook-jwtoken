@@ -181,7 +181,7 @@ module.exports.jwt: {
     expiresIn: '7d',
   },
   verifyOptions: {
-    algorithms: ['HS256'],
+    algorithms: ['RS256'],
   },
 },
 
