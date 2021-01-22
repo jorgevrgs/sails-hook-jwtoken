@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run lint && npm run custom-tests",
     "custom-tests": "node ./node_modules/mocha/bin/mocha && echo \"Custom tests all passed.\" && echo",
-    "lint": "node ./node_modules/eslint/bin/eslint . --max-warnings=0 && echo '✔  Your code looks good.'"
+    "lint": "node ./node_modules/eslint/bin/eslint . --max-warnings=0 && echo '✔  Your code looks good.'",
+    "coverage": "nyc npm test"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "chai": "^4.2.0",
     "eslint": "^7.18.0",
     "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
     "sails": "^1.4.0",
     "sails-disk": "^2.1.0",
     "sails-hook-orm": "^3.0.1",
