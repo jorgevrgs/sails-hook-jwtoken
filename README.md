@@ -1,6 +1,4 @@
-# sails-hook-jsonwebtoken
-
-jsonwebtoken hook for Sails.js v1
+# sails-hook-jwtoken - jsonwebtoken hook for Sails.js v1
 
 ## Installation
 
@@ -140,6 +138,10 @@ module.exports.jwt: {
   model: 'user',
   privateFile: false,
   publicFile: false,
+  privateFileName: 'private',
+  publicFileName: 'public',
+  ext: '.pem',
+  passphrase: '',
   privateKey: 'super-secret-string',
   publicKey: 'super-secret-string',
   signOptions: {
