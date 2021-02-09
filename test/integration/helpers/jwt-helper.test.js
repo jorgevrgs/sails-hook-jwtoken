@@ -1,5 +1,4 @@
 // var token = '';
-const { assert } = require('chai');
 var tokenFromString = '';
 var tokenFromFile = '';
 var user;
@@ -67,7 +66,21 @@ describe('Helpers', function () {
       assert.isString(tokenFromString);
     });
 
-    it('Should validate a key from string', async function () {
+    it('Should thow an error if private key is not available', async function () {
+      const privateKey = sails.config.jwt.privateKey;
+
+      try {
+        sails.config.jwt.privateKey = '';
+
+        await sails.helpers.jwt.sign({});
+      } catch (error) {
+        assert.equal(error.code, 'badRequest');
+
+        sails.config.jwt.privateKey = privateKey;
+      }
+    });
+
+    it('Should verify a key from string', async function () {
       const authenticatedUser = await sails.helpers.jwt.verify({
         headers: {
           authorization: `Bearer ${tokenFromString}`,
@@ -75,6 +88,87 @@ describe('Helpers', function () {
       });
 
       assert.isDefined(authenticatedUser.id);
+    });
+
+    it('Should thow "jwtVerifyError" error with wrong public key', async function () {
+      const publicKey = sails.config.jwt.publicKey;
+
+      try {
+        sails.config.jwt.publicKey = 'ABC123';
+
+        await sails.helpers.jwt.verify({
+          headers: {
+            authorization: `Bearer ${tokenFromString}`,
+          },
+        });
+      } catch (error) {
+        assert.equal(error.code, 'jwtVerifyError');
+
+        sails.config.jwt.publicKey = publicKey;
+      }
+    });
+
+    it('Should thow "missingOrEmptySub" with an missing sub', async function () {
+      try {
+        const token = await sails.helpers.jwt.sign({ id: 1 });
+
+        await sails.helpers.jwt.verify({
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (error) {
+        assert.equal(error.code, 'missingOrEmptySub');
+      }
+    });
+
+    it('Should thow "modelNotFound" with a wrong model name', async function () {
+      const model = sails.config.jwt.model;
+      sails.config.jwt.model = 'other';
+
+      try {
+        await sails.helpers.jwt.verify({
+          headers: {
+            authorization: `Bearer ${tokenFromString}`,
+          },
+        });
+      } catch (error) {
+        assert.equal(error.code, 'modelNotFound');
+        sails.config.jwt.model = model;
+      }
+    });
+
+    it('Should thow "userNotFound" when an user is deleted', function (done) {
+      // Create an user
+      const User = sails.models[sails.config.jwt.model];
+      User.create({
+        fullName: 'Fake User',
+        emailAddress: 'fake@email.com',
+        password: 'abc123',
+      })
+        .meta({ fetch: true })
+        .then(async (fakeUser) => {
+          // An user is created then generate a token
+          const token = await sails.helpers.jwt.sign({ sub: fakeUser.id });
+
+          // An user is deleted with an existing token
+          User.destroyOne({ id: fakeUser.id })
+            .then(async () => {
+              try {
+                // When trying to verify the token an exception is thrown
+                await sails.helpers.jwt.verify({
+                  headers: {
+                    authorization: `Bearer ${token}`,
+                  },
+                });
+              } catch (error) {
+                assert.equal(error.code, 'userNotFound');
+                return done();
+              }
+            })
+            .catch((err) => done(err));
+        })
+        .catch((err) => done(err));
     });
   });
 

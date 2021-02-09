@@ -1,0 +1,12 @@
+{
+  "all": false,
+  "include": [
+    "lib/private/jwt/*.js"
+  ],
+  "exclude": [
+    "coverage",
+    "docker",
+    "test",
+    "node_modules"
+  ]
+}

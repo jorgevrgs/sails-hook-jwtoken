@@ -9,6 +9,7 @@
 ./test
 ./tests
 ./.github
+./.nyc_output
 
 node_modules
 npm-debug.log
@@ -32,3 +33,4 @@ lib-cov
 nbproject
 .tmp
 dump.rdb
+.env
