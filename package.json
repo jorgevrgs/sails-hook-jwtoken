@@ -1,5 +1,5 @@
 {
-  "name": "sails-hook-jwtoken",
+  "name": "@jorgevrgs/sails-hook-jwtoken",
   "version": "0.0.4",
   "description": "jsonwebtoken hook for Sails.js v1",
   "main": "lib/sails-hook-jsonwebtoken.js",
