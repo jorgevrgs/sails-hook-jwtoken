@@ -10,9 +10,11 @@ npm i sails-hook-jwtoken
 
 ![npm](https://img.shields.io/npm/v/sails-hook-jwtoken?style=for-the-badge)
 
+![Travis (.org)](https://img.shields.io/travis/jorgevrgs/sails-hook-jwtoken?style=for-the-badge)
+
 ## How to use
 
-### Generate your token in a controller:
+### sails.helpers.jwt.sign(payload) Generate your token
 
 ```js
 // api/controller/entrance/login
@@ -23,6 +25,10 @@ const jwtToken = await sails.helpers.jwt.sign({
 
 return jwtToken;
 ```
+
+### sails.helpers.jwt.verify(req, res) Verify token
+
+By default the module include a validation hook for the authorization header, however the user could disable the default and implement a custom one with the configuration set to `sails.config.jwt.enableRequestHook = false`.
 
 ### Process your `req.me` object
 
@@ -127,4 +133,74 @@ Or another article [Creating RSA Keys using OpenSSL](https://www.scottbrady91.co
 ```
 openssl genrsa -out private.pem 2048
 openssl rsa -in private.pem -pubout -out public.pem
+```
+
+## Example
+
+If you want to implement your own token verification process, then set configuration `sails.config.jwt.enableRequestHook = false` in the `config/jwt.js` file:
+
+```js
+// config/jwt.js
+module.exports.jwt = {
+  ...
+  enableRequestHook: false
+}
+```
+
+### Implement a Policy
+
+Run `sails generate policy check-token`.
+
+Check the token:
+
+```js
+// api/policies/check-token.js
+// req.authorization = 'Bearer {{token}}'
+module.exports = async function (req, res) {
+  const user = await sails.helpers.jwt
+    .verify(req, res, next)
+    .tolerate((err) => sails.log.silly(err));
+  if (user) {
+    req.me = user;
+  }
+
+  next();
+};
+```
+
+Use the policy in the controllers:
+
+```js
+// config/policies.js
+module.exports.policies = {
+  '*': 'is-super-admin',
+  'private/*': ['check-token', 'check-permissions', 'other-policies'],
+  'public/*': true,
+};
+```
+
+### Implement a Hook
+
+Run `sails generate hook check-token`.
+
+Check the token:
+
+```js
+// api/hooks/check-token/index.js
+// req.authorization = 'Bearer {{token}}'
+...
+routes: {
+  before: {
+    '/*': {
+      skipAssets: true,
+      fn: async function(req, res, next) {
+        const user = await sails.helpers.jwt.verify(req, res).tolerate((err) => sails.log.silly(err));
+        if (user) {
+          req.me = user;
+        }
+        next();
+      }
+    }
+  }
+}
 ```
