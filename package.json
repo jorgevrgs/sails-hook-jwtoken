@@ -2,7 +2,7 @@
   "name": "@jorgevrgs/sails-hook-jwtoken",
   "version": "0.0.5",
   "description": "jsonwebtoken hook for Sails.js v1",
-  "main": "lib/sails-hook-jsonwebtoken.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "npm run lint && npm run custom-tests",
     "custom-tests": "node ./node_modules/mocha/bin/mocha && echo \"Custom tests all passed.\" && echo",
