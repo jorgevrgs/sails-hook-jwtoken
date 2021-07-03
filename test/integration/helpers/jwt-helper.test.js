@@ -66,7 +66,7 @@ describe('Helpers', function () {
       assert.isString(tokenFromString);
     });
 
-    it('Should thow an error if private key is not available', async function () {
+    it('Should throw an error if private key is not available', async function () {
       const privateKey = sails.config.jwt.privateKey;
 
       try {
@@ -90,7 +90,7 @@ describe('Helpers', function () {
       assert.isDefined(authenticatedUser.id);
     });
 
-    it('Should thow "jwtVerifyError" error with wrong public key', async function () {
+    it('Should throw "jwtVerifyError" error with wrong public key', async function () {
       const publicKey = sails.config.jwt.publicKey;
 
       try {
@@ -108,7 +108,7 @@ describe('Helpers', function () {
       }
     });
 
-    it('Should thow "missingOrEmptySub" with an missing sub', async function () {
+    it('Should throw "missingOrEmptySub" with an missing sub', async function () {
       try {
         const token = await sails.helpers.jwt.sign({ id: 1 });
 
@@ -122,7 +122,7 @@ describe('Helpers', function () {
       }
     });
 
-    it('Should thow "modelNotFound" with a wrong model name', async function () {
+    it('Should throw "modelNotFound" with a wrong model name', async function () {
       const model = sails.config.jwt.model;
       sails.config.jwt.model = 'other';
 
@@ -138,7 +138,7 @@ describe('Helpers', function () {
       }
     });
 
-    it('Should thow "userNotFound" when an user is deleted', function (done) {
+    it('Should throw "userNotFound" when an user is deleted', function (done) {
       // Create an user
       const User = sails.models[sails.config.jwt.model];
       User.create({
