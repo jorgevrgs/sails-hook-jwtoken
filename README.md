@@ -10,6 +10,8 @@ npm i sails-hook-jwtoken
 
 ![Travis (.org)](https://img.shields.io/travis/jorgevrgs/sails-hook-jwtoken?style=for-the-badge)
 
+[![Node.js Package](https://github.com/jorgevrgs/sails-hook-jwtoken/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/jorgevrgs/sails-hook-jwtoken/actions/workflows/npm-publish.yml)
+
 ## How to use
 
 ### sails.helpers.jwt.sign(payload) Generate your token
