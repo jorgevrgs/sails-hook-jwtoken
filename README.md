@@ -6,11 +6,11 @@
 npm i sails-hook-jwtoken
 ```
 
-![David](https://img.shields.io/david/jorgevrgs/sails-hook-jwtoken?style=for-the-badge)
-
 ![npm](https://img.shields.io/npm/v/sails-hook-jwtoken?style=for-the-badge)
 
 ![Travis (.org)](https://img.shields.io/travis/jorgevrgs/sails-hook-jwtoken?style=for-the-badge)
+
+[![Node.js Package](https://github.com/jorgevrgs/sails-hook-jwtoken/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/jorgevrgs/sails-hook-jwtoken/actions/workflows/npm-publish.yml)
 
 ## How to use
 
