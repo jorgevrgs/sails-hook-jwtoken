@@ -6,11 +6,7 @@
 npm i sails-hook-jwtoken
 ```
 
-![npm](https://img.shields.io/npm/v/sails-hook-jwtoken?style=for-the-badge)
-
-![Travis (.org)](https://img.shields.io/travis/jorgevrgs/sails-hook-jwtoken?style=for-the-badge)
-
-[![Node.js Package](https://github.com/jorgevrgs/sails-hook-jwtoken/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/jorgevrgs/sails-hook-jwtoken/actions/workflows/npm-publish.yml)
+![npm](https://img.shields.io/npm/v/sails-hook-jwtoken) [![Node.js Package](https://github.com/jorgevrgs/sails-hook-jwtoken/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/jorgevrgs/sails-hook-jwtoken/actions/workflows/npm-publish.yml)
 
 ## How to use
 
